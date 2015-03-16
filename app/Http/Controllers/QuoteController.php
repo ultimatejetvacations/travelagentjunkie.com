@@ -20,11 +20,12 @@ class QuoteController extends Controller {
 
     /**
      * @param IQuoteRepository $quoteRepository
-     * @param IQuoteOptionRepository $quoteOptionRepository
-     * @param string $token
+     * @param $token
      * @return \Illuminate\View\View
+     * @throws InternalErrorException
+     * @throws UnknownModelException
      */
-	public function quote(IQuoteRepository $quoteRepository, IQuoteOptionRepository $quoteOptionRepository, $token)
+	public function quote(IQuoteRepository $quoteRepository, $token)
 	{
         // Select quote based on token
         $quote = $quoteRepository->getEntity()->where('token', '=', $token)->get()->first();
@@ -39,7 +40,7 @@ class QuoteController extends Controller {
         if(count($options->all()) < 1)
             throw new InternalErrorException(new \Exception('Sorry the quote you are looking for does not have options.'));
 
-		return view('quote.index', compact('options'));
+		return view('quote.index', compact('options', 'quote', 'priorities'));
 	}
 
 }

@@ -26,6 +26,26 @@ class QuoteOption extends BaseEntity implements IQuoteOption {
     protected $fillable = [];
 
     /**
+     * Return all the airlines within an option
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function airlines()
+    {
+        return $this->hasMany('App\Entities\QuoteOptionAirline', 'quote_option_id', 'quote_option_id');
+    }
+
+    /**
+     * Return the hotels within an option
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rooms()
+    {
+        return $this->hasMany('App\Entities\QuoteOptionHotelRoom', 'quote_option_id', 'quote_option_id');
+    }
+
+    /**
      * Return all the photos within an option
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

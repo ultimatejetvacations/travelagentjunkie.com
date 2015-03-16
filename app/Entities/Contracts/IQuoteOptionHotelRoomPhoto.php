@@ -3,5 +3,6 @@
 interface IQuoteOptionHotelRoomPhoto extends IBaseEntity {
 
     function hotelPhoto();
+    function roomPhoto();
 
 }

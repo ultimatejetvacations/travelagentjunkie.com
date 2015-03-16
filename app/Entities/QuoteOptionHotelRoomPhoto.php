@@ -35,4 +35,14 @@ class QuoteOptionHotelRoomPhoto extends BaseEntity implements IQuoteOptionHotelR
         return $this->hasOne('App\Entities\HotelPhoto', 'id_hotel_photo', 'id_hotel_photo');
     }
 
+    /**
+     * Return the actual room photo record
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function roomPhoto()
+    {
+        return $this->hasOne('App\Entities\RoomPhoto', 'id_room_categories_photo', 'id_room_categories_photo');
+    }
+
 }

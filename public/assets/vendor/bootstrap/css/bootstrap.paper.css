@@ -2251,7 +2251,7 @@ th {
 .table > tfoot > tr > td {
   padding: 8px;
   line-height: 1.846;
-  vertical-align: top;
+  vertical-align: middle;
   border-top: 1px solid #dddddd;
 }
 .table > thead > tr > th {
@@ -6343,8 +6343,7 @@ button.close {
   border: 0;
 }
 .hidden {
-  display: none !important;
-  visibility: hidden !important;
+  display: none;
 }
 .affix {
   position: fixed;
