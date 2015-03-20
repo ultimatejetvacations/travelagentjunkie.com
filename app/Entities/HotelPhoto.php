@@ -1,8 +1,6 @@
 <?php namespace App\Entities;
 
-use App\Entities\Contracts\IHotelPhoto;
-
-class HotelPhoto extends BaseEntity implements IHotelPhoto {
+class HotelPhoto extends BaseEntity {
 
     /**
      * The database table used by the model.

@@ -1,8 +1,6 @@
 <?php namespace App\Entities;
 
-use App\Entities\Contracts\IAirline;
-
-class Airline extends BaseEntity implements IAirline {
+class Airline extends BaseEntity {
 
     /**
      * The database table used by the model.

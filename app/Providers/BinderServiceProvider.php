@@ -21,10 +21,6 @@ class BinderServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-        // Entities
-        $this->app->bind('App\Entities\Contracts\IQuote', 'App\Entities\Quote');
-        $this->app->bind('App\Entities\Contracts\IQuoteOption', 'App\Entities\QuoteOption');
-
         // Repositories
         $this->app->bind('App\Repositories\Contracts\IQuoteRepository', 'App\Repositories\QuoteRepository');
         $this->app->bind('App\Repositories\Contracts\IQuoteOptionRepository', 'App\Repositories\QuoteOptionRepository');

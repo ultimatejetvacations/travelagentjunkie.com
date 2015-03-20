@@ -1,9 +1,8 @@
 <?php namespace App\Http\Controllers;
 
-use App\Entities\Contracts\IQuote;
+use App\Entities\Quote;
 use App\Exceptions\CustomExceptions\InternalErrorException;
 use App\Exceptions\CustomExceptions\UnknownModelException;
-use App\Repositories\Contracts\IQuoteOptionRepository;
 use App\Repositories\Contracts\IQuoteRepository;
 
 class QuoteController extends Controller {
@@ -31,7 +30,7 @@ class QuoteController extends Controller {
         $quote = $quoteRepository->getEntity()->where('token', '=', $token)->get()->first();
 
         // Check the quote is not empty
-        if( ! $quote instanceof IQuote)
+        if( ! $quote instanceof Quote)
             throw new UnknownModelException(new \Exception('The quote you are looking for does not exist.'));
 
         // Select the options for the quote

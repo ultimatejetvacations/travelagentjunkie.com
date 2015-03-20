@@ -144,6 +144,44 @@
                             </div>
                         @endif
 
+                        {{--Transfers--}}
+                        @if(count( $option->vendors()->get()->filter(function($item) { return ($item->vendor_id > 0 && $item->vendor()->get()->first()->type == 'Transfer'); })->all() )>0)
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Transfers</h3>
+                                </div>
+                                <div class="panel-body">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+
+                                            <thead>
+                                            <tr>
+                                                <th>&nbsp;</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Price</th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody class="marginTop20">
+                                            @foreach($option->vendors()->get()->filter(function($item) { return ($item->vendor_id > 0 && $item->vendor()->get()->first()->type == 'Transfer'); })->all() as $service)
+                                                <tr>
+                                                    <td class="text-center"><input checked type="checkbox" name="transfer[]" class="transfer_option_choice" value="" price=""></td>
+                                                    <td>{{$service->vendor()->get()->first()->vendor_name}}</td>
+                                                    <td>{{$service->description}}</td>
+                                                    <td>{{$service->price}}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        @endif
+
                         {{--Hotel--}}
                         @if(count($option->rooms()->get())>0)
                             <div class="panel panel-success">
@@ -254,6 +292,202 @@
                             </div>
                         @endif
 
+                        {{--Virtuoso Amenities--}}
+                        @if(count($option->rooms()->get()->filter(function($item) { return $item->include_virtuoso_amenities == 'y'; } )->all()) > 0)
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Exclusive Amenities</h3>
+                                </div>
+                                <div class="panel-body">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+
+                                            <tbody class="marginTop20">
+                                            @foreach($option->rooms()->get()->filter(function($item) { return $item->include_virtuoso_amenities == 'y'; } )->all() as $room)
+                                                <?php
+                                                $amenities = $room->room()->get()->first()->hotel()->get()->first()->virtuoso_amenities;
+                                                $amenities = explode("\r", $amenities);
+                                                ?>
+                                                @if(count($amenities)>0)
+                                                    <tr>
+                                                        <th colspan="3">{{$room->room()->get()->first()->hotel()->get()->first()->name_}}</th>
+                                                    </tr>
+                                                    @foreach($amenities as $amenity)
+                                                        @if(!empty($amenity))
+                                                            <tr>
+                                                                <td class="text-center"><input checked type="checkbox" disabled="disabled"></td>
+                                                                <td>{{$amenity}}</td>
+                                                                <td>$0.00</td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        @endif
+
+                        {{--Hotel Inclusions--}}
+                        @if(count($option->rooms()->get()->filter(function($item) { return $item->include_hotel_inclusions == 'y'; } )->all()) > 0)
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Hotel Inclusions</h3>
+                                </div>
+                                <div class="panel-body">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+
+                                            <tbody class="marginTop20">
+                                            @foreach($option->rooms()->get()->filter(function($item) { return $item->include_hotel_inclusions == 'y'; } )->all() as $room)
+                                                <?php
+                                                $inclusions = $room->room()->get()->first()->hotel()->get()->first()->resortFact()->get()->first()->room_amenities;
+                                                $inclusions = explode("\r", $inclusions);
+                                                ?>
+                                                @if(count($inclusions)>0)
+                                                    <tr>
+                                                        <th colspan="2">{{$room->room()->get()->first()->hotel()->get()->first()->name_}}</th>
+                                                    </tr>
+                                                    @foreach($inclusions as $inclusion)
+                                                        @if(!empty($inclusion))
+                                                            <tr>
+                                                                <td>{{$inclusion}}</td>
+                                                                <td>$0.00</td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        @endif
+
+                        {{--Excursions--}}
+                        @if(count( $option->vendors()->get()->filter(function($item) { return ($item->vendor_id > 0 && $item->vendor()->get()->first()->type == 'Excursion'); })->all() )>0)
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Excursions</h3>
+                                </div>
+                                <div class="panel-body">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+
+                                            <thead>
+                                                <tr>
+                                                    <th>&nbsp;</th>
+                                                    <th>Name</th>
+                                                    <th>Description</th>
+                                                    <th>Price</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody class="marginTop20">
+                                            @foreach($option->vendors()->get()->filter(function($item) { return ($item->vendor_id > 0 && $item->vendor()->get()->first()->type == 'Excursion'); })->all() as $service)
+                                                <tr>
+                                                    <td class="text-center"><input checked type="checkbox" name="transfer[]" class="excursion_option_choice" value="" price=""></td>
+                                                    <td>{{$service->vendor()->get()->first()->vendor_name}}</td>
+                                                    <td>{{$service->description}}</td>
+                                                    <td>{{$service->price}}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        @endif
+
+                        {{--Insurance--}}
+                        @if($option->insurance_id > 0)
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Insurance</h3>
+                                </div>
+                                <div class="panel-body">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+
+                                            <thead>
+                                                <tr>
+                                                    <th>&nbsp;</th>
+                                                    <th>Name</th>
+                                                    <th>Price</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody class="marginTop20">
+                                                <tr>
+                                                    <td class="text-center"><input checked type="checkbox" name="insurance[]" class="insurance_option_choice" value="" price=""></td>
+                                                    <td>{{$option->insurance()->get()->first()->insurance_name}}</td>
+                                                    <td>{{$option->insurance_cost}}</td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        @endif
+
+                        {{--Additional services--}}
+                        @if(count( $option->vendors()->get()->filter(function($item) { return ($item->vendor_id == 0 || $item->vendor()->get()->first()->type == 'Misc'); })->all() )>0)
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Additional services</h3>
+                                </div>
+                                <div class="panel-body">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+
+                                            <thead>
+                                            <tr>
+                                                <th>&nbsp;</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Price</th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody class="marginTop20">
+                                            @foreach($option->vendors()->get()->filter(function($item) { return ($item->vendor_id == 0 || $item->vendor()->get()->first()->type == 'Misc'); })->all() as $service)
+                                                <tr>
+                                                    <td class="text-center"><input checked type="checkbox" name="additional_services[]" class="additional_service_option_choice" value="" price=""></td>
+                                                    <td>@if($service->vendor_id == 0) {{$service->service_name}} @else {{$service->vendor()->get()->first()->vendor_name}} @endif</td>
+                                                    <td>{{$service->description}}</td>
+                                                    <td>{{$service->price}}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        @endif
+
+                        @if(!empty($option->terms))
+                            <div class="col-xs-12 marginBottom20">
+                                {{\String::length($option->terms)}}
+                            </div>
+                        @endif
 
                     </div>
                     <div class="modal-footer">

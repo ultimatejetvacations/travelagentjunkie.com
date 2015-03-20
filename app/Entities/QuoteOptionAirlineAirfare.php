@@ -1,8 +1,6 @@
 <?php namespace App\Entities;
 
-use App\Entities\Contracts\IQuoteOptionAirlineAirfare;
-
-class QuoteOptionAirlineAirfare extends BaseEntity implements IQuoteOptionAirlineAirfare {
+class QuoteOptionAirlineAirfare extends BaseEntity {
 
     /**
      * The database table used by the model.

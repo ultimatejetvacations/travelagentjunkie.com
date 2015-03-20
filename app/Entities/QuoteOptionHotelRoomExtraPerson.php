@@ -1,8 +1,6 @@
 <?php namespace App\Entities;
 
-use App\Entities\Contracts\IQuoteOptionHotelRoomExtraPerson;
-
-class QuoteOptionHotelRoomExtraPerson extends BaseEntity implements IQuoteOptionHotelRoomExtraPerson {
+class QuoteOptionHotelRoomExtraPerson extends BaseEntity {
 
     /**
      * The database table used by the model.

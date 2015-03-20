@@ -1,8 +1,6 @@
 <?php namespace App\Entities;
 
-use App\Entities\Contracts\IQuoteOption;
-
-class QuoteOption extends BaseEntity implements IQuoteOption {
+class QuoteOption extends BaseEntity {
 
     /**
      * The database table used by the model.
@@ -36,13 +34,13 @@ class QuoteOption extends BaseEntity implements IQuoteOption {
     }
 
     /**
-     * Return the hotels within an option
+     * Return the quote option insurance
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function rooms()
+    public function insurance()
     {
-        return $this->hasMany('App\Entities\QuoteOptionHotelRoom', 'quote_option_id', 'quote_option_id');
+        return $this->hasOne('App\Entities\Insurance', 'insurance_id', 'insurance_id');
     }
 
     /**
@@ -60,8 +58,29 @@ class QuoteOption extends BaseEntity implements IQuoteOption {
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    function quote()
+    public function quote()
     {
         return $this->belongsTo('App\Entities\Quote', 'quote_id', 'quote_id');
     }
+
+    /**
+     * Return the hotels within an option
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rooms()
+    {
+        return $this->hasMany('App\Entities\QuoteOptionHotelRoom', 'quote_option_id', 'quote_option_id');
+    }
+
+    /**
+     * Return the service within an option
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function vendors()
+    {
+        return $this->hasMany('App\Entities\QuoteOptionVendor', 'quote_option_id', 'quote_option_id');
+    }
+
 }

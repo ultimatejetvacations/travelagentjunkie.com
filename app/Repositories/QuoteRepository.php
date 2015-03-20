@@ -1,25 +1,25 @@
 <?php namespace App\Repositories;
 
-use App\Entities\Contracts\IQuote;
+use App\Entities\Quote;
 use App\Repositories\Contracts\IQuoteRepository;
 
 class QuoteRepository extends BaseRepository implements IQuoteRepository {
 
     /**
-     * @var IQuote
+     * @var Quote
      */
     protected $entity;
 
     /**
-     * @param IQuote $quote
+     * @param Quote $quote
      */
-    public function __construct(IQuote $quote)
+    public function __construct(Quote $quote)
     {
         $this->entity = $quote;
     }
 
     /**
-     * @return IQuote
+     * @return Quote
      */
     public function getEntity()
     {

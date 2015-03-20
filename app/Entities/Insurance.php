@@ -1,20 +1,20 @@
 <?php namespace App\Entities;
 
-class RoomPhoto extends BaseEntity {
+class Insurance extends BaseEntity {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'room_categories_photo';
+    protected $table = 'insurance';
 
     /**
      * The table's primary key
      *
      * @var string
      */
-    protected $primaryKey = 'id_room_categories_photo';
+    protected $primaryKey = 'insurance_id';
 
     /**
      * The attributes that are mass assignable.

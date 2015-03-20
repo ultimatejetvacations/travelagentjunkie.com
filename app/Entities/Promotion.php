@@ -1,8 +1,6 @@
 <?php namespace App\Entities;
 
-use App\Entities\Contracts\IPromotion;
-
-class Promotion extends BaseEntity implements IPromotion {
+class Promotion extends BaseEntity {
 
     /**
      * The database table used by the model.

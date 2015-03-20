@@ -1,20 +1,20 @@
 <?php namespace App\Entities;
 
-class Quote extends BaseEntity {
+class QuoteOptionVendor extends BaseEntity {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'quotes';
+    protected $table = 'quote_options_vendors';
 
     /**
      * The table's primary key
      *
      * @var string
      */
-    protected $primaryKey = 'quote_id';
+    protected $primaryKey = 'quote_options_vendor_id';
 
     /**
      * The attributes that are mass assignable.
@@ -24,13 +24,12 @@ class Quote extends BaseEntity {
     protected $fillable = [];
 
     /**
-     * Return the options for an specific quote
+     * Return the actual vendor
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function quoteOptions()
+    public function vendor()
     {
-        return $this->hasMany('App\Entities\QuoteOption', 'quote_id', 'quote_id');
+        return $this->hasOne('App\Entities\Vendor', 'vendor_id', 'vendor_id');
     }
-
 }

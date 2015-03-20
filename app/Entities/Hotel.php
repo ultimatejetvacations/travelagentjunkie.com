@@ -1,8 +1,6 @@
 <?php namespace App\Entities;
 
-use App\Entities\Contracts\IHotel;
-
-class Hotel extends BaseEntity implements IHotel {
+class Hotel extends BaseEntity {
 
     /**
      * The database table used by the model.
@@ -24,5 +22,15 @@ class Hotel extends BaseEntity implements IHotel {
      * @var array
      */
     protected $fillable = [];
+
+    /**
+     * return the hotel facts
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function resortFact()
+    {
+        return $this->hasOne('App\Entities\ResortFact', 'id_hotel', 'id_hotel');
+    }
 
 }

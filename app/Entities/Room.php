@@ -1,8 +1,6 @@
 <?php namespace App\Entities;
 
-use App\Entities\Contracts\IRoom;
-
-class Room extends BaseEntity implements IRoom {
+class Room extends BaseEntity {
 
     /**
      * The database table used by the model.
