@@ -6,17 +6,40 @@ body {
 a, button {
     outline: none !important;
 }
-
+.custom-affix {
+    left: 66.66666667%;
+}
 .marginBottom20 {
     margin-bottom: 20px;
 }
-.navbar-brand {
-    line-height:12px;
-    padding-top:20px;
-    padding-bottom:5px;
+/*.navbar-brand {*/
+    /*line-height:12px;*/
+    /*padding-top:20px;*/
+    /*padding-bottom:5px;*/
+/*}*/
+/*.navbar-brand small {*/
+    /*display:block;*/
+    /*margin-top: 5px;*/
+    /*font-size:10px;*/
+/*}*/
+.navbar-brand img {
+    height: 23px;
 }
-.navbar-brand small {
-    display:block;
-    margin-top: 5px;
-    font-size:10px;
+.navbar-brand > .inline {
+    display: inline-block;
+}
+
+@media screen and (min-width: 992px) {
+    .custom-col-md-8 {
+        width: 66.66666667% !important;
+    }
+    .custom-col-md-4 {
+        width: 33.33333333% !important;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .custom-modal-dialog {
+        width: auto;
+    }
 }

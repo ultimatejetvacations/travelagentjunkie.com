@@ -12,7 +12,7 @@ class StringServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		$this->app->bind('utils.string', function(){
-            return new StringBuilder;
+            return new String();
         });
 	}
 

@@ -20,7 +20,7 @@
                     @if(isset($message))
                         {{$message}}
                     @else
-                        The Page you are looking for does not exist.
+                        The page you are looking for does not exist.
                     @endif
                 </p>
             </div>

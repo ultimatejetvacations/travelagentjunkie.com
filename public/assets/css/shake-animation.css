@@ -1,0 +1,44 @@
+.shake-animation {
+    -ms-animation: shake 2.5s infinite linear; /* IE 9 */
+    -webkit-animation: shake 2.5s infinite linear; /* Chrome, Safari, Opera */
+    animation: shake 2.5s infinite linear;
+}
+
+/* IE 9 */
+@-ms-keyframes shake {
+    0% {transform: rotate(0deg);}
+    4% {transform: rotate(7deg);}
+    8% {transform: rotate(-7deg);}
+    12% {transform: rotate(7deg);}
+    16% {transform: rotate(-7deg);}
+    20% {transform: rotate(7deg);}
+    24% {transform: rotate(-7deg);}
+    28% {transform: rotate(0deg);}
+    100% {transform: rotate(0deg);}
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes shake {
+    0% {transform: rotate(0deg);}
+    4% {transform: rotate(7deg);}
+    8% {transform: rotate(-7deg);}
+    12% {transform: rotate(7deg);}
+    16% {transform: rotate(-7deg);}
+    20% {transform: rotate(7deg);}
+    24% {transform: rotate(-7deg);}
+    28% {transform: rotate(0deg);}
+    100% {transform: rotate(0deg);}
+}
+
+/* Standard syntax */
+@keyframes shake {
+    0% {transform: rotate(0deg);}
+    4% {transform: rotate(7deg);}
+    8% {transform: rotate(-7deg);}
+    12% {transform: rotate(7deg);}
+    16% {transform: rotate(-7deg);}
+    20% {transform: rotate(7deg);}
+    24% {transform: rotate(-7deg);}
+    28% {transform: rotate(0deg);}
+    100% {transform: rotate(0deg);}
+}

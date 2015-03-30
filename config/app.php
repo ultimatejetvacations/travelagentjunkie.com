@@ -145,7 +145,9 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
+        'App\Utils\Misc\MiscServiceProvider',
         'App\Utils\String\StringServiceProvider',
+        'Illuminate\Html\HtmlServiceProvider',
 
 	],
 
@@ -198,7 +200,10 @@ return [
         /*
 		 * Application Facades...
 		 */
-        'String'    => 'App\Utils\String\String'
+        'Misc'      => 'App\Utils\Misc\MiscFacade',
+        'String'    => 'App\Utils\String\StringFacade',
+        'Html'      => 'Illuminate\Html\HtmlFacade',
+        'Form'      => 'Illuminate\Html\FormFacade',
 
 	],
 

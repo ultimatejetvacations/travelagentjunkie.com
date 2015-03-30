@@ -24,6 +24,26 @@ class Quote extends BaseEntity {
     protected $fillable = [];
 
     /**
+     * Return the quote member
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function member()
+    {
+        return $this->hasOne('App\Entities\Member', 'member_id', 'member_id');
+    }
+
+    /**
+     * Return the post sale for that quote
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function postSale()
+    {
+        return $this->hasOne('App\Entities\PostSale', 'quote_id', 'quote_id');
+    }
+
+    /**
      * Return the options for an specific quote
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
