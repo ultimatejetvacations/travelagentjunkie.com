@@ -105,7 +105,7 @@
         <div class="form-group @if($errors->has('credit_card_number')) has-error has-feedback @endif">
             {!! \Form::label('credit_card_number', 'Credit Card Number*:', ['class' => 'control-label col-sm-2']) !!}
             <div class="col-sm-10">
-                {!! \Form::text('credit_card_number', null, ['class' => 'form-control input-sm']) !!}
+                {!! \Form::text('credit_card_number', null, ['class' => 'form-control input-sm', 'placeholder' => 'Enter your credit card number without spaces and dashes.']) !!}
                 @if($errors->has('credit_card_number'))
                     <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                     <p class="label label-danger">{{$errors->first('credit_card_number')}}</p>
@@ -116,7 +116,7 @@
         <div class="form-group @if($errors->has('expiration_date')) has-error has-feedback @endif">
             {!! \Form::label('expiration_date', 'Expiration Date*:', ['class' => 'control-label col-sm-2']) !!}
             <div class="col-sm-10">
-                {!! \Form::text('expiration_date', null, ['class' => 'form-control input-sm']) !!}
+                {!! \Form::text('expiration_date', null, ['class' => 'form-control input-sm', 'placeholder' => 'yyyy-mm']) !!}
                 @if($errors->has('expiration_date'))
                     <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                     <p class="label label-danger">{{$errors->first('expiration_date')}}</p>
