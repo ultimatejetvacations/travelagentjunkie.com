@@ -22,7 +22,7 @@ class CreateCreditCardRequest extends Request {
 		return [
 			'token'                 =>  'required|exists:quotes,token',
             'customer_profile_id'   =>  'required|exists:member_customer_profiles,customerProfileId',
-			'credit_card_number'    =>  'required',
+			'credit_card_number'    =>  'required|integer',
 			'expiration_date'       =>  'required|date_format:Y-m',
 		];
 	}
