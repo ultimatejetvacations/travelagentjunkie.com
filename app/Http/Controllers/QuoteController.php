@@ -167,7 +167,7 @@ class QuoteController extends Controller {
         $quoteOption = $quote->quoteOptions()->get()->filter(function($item) { return $item->selected == 'y'; })->first();
 
         // Prepare variables for outside request
-        $url = "https://ujv.travelagentadmin.com/quotes/quote.php?quote_id=".$quote->quote_id;
+        $url = "https://ujv.travelagentadmin.com/quotes/test.php?quote_id=".$quote->quote_id;
         $credentials = ['userName' => 'travelAgentJunkie', 'passWord' => \Hash::make('F#T#A@305')];
         $data = [
             'userName'          =>  $credentials['userName'],
@@ -176,20 +176,28 @@ class QuoteController extends Controller {
             'quote_option_id'   =>  $quoteOption->quote_option_id
         ];
 
+		// url-ify the data for the POST
+		$fields_string = '';
+		foreach($data as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+		rtrim($fields_string, '&');
+
         //open connection
-        $ch = curl_init();
+		$ch = curl_init();
 
         //set the url, POST data
         curl_setopt($ch,CURLOPT_URL, $url);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch,CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($ch,CURLOPT_POSTFIELDS, $data);
+		curl_setopt($ch,CURLOPT_POST, count($fields_string));
+		curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
 
-        //execute post
-        if($result = curl_exec($ch) === false)
-            $result = curl_error($ch);
+		//execute post
+		if( ! $result = curl_exec($ch))
+	    {
+	        trigger_error(curl_error($ch));
+	    }
+        // curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($ch,CURLOPT_POST, 1);
+        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 
         //close connection
         curl_close($ch);
