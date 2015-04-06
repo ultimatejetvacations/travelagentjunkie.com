@@ -186,7 +186,7 @@ class QuoteController extends Controller {
 
         //set the url, POST data
         curl_setopt($ch,CURLOPT_URL, $url);
-		curl_setopt($ch,CURLOPT_POST, count($fields_string));
+		curl_setopt($ch,CURLOPT_POST, count($data));
 		curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
 
 		//execute post
