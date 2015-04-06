@@ -8,10 +8,10 @@ use App\Exceptions\CustomExceptions\UnknownModelException;
 use App\Http\Requests\ApproveOptionRequest;
 use App\Http\Requests\CreateCreditCardRequest;
 use App\Http\Requests\CreateCustomerProfileRequest;
+use App\Http\Requests\CreatePostSaleRequest;
 use App\Http\Requests\CreateTravelerRequest;
 use App\Repositories\Contracts\IMemberCustomerProfileRepository;
 use App\Repositories\Contracts\IMemberTravelerRepository;
-use App\Repositories\Contracts\IPostSaleRepository;
 use App\Repositories\Contracts\IPostSaleTravelerRepository;
 use App\Repositories\Contracts\IQuoteOptionAirlineRepository;
 use App\Repositories\Contracts\IQuoteOptionHotelRoomRepository;
@@ -131,7 +131,7 @@ class QuoteController extends Controller {
     public function createCustomerProfile(CreateCustomerProfileRequest $request, IQuoteRepository $quoteRepository, MemberCustomerProfileRepository $memberCustomerProfileRepository, Authorize $authorize)
     {
         // To use testing uncomment the following line
-        // $authorize = new Authorize($test = true);
+        $authorize = new Authorize($test = true);
 
         // Select quote
         $quote = $quoteRepository->getEntity()->where('token', '=', $request->get('token'))->get()->first();
@@ -154,6 +154,47 @@ class QuoteController extends Controller {
             return \Redirect::back()->withInput()->withErrors(['response_error' => "Error trying to create the payment profile."]);
 
         return \Redirect::route('quote.secondStep', $request->get('token'));
+    }
+
+    public function createPostSale(CreatePostSaleRequest $request, IQuoteRepository $quoteRepository)
+    {
+        $token = $request->get('token');
+
+        // Select quote based on token
+        $quote = $quoteRepository->getEntity()->where('token', '=', $token)->get()->first();
+
+        // Validate if the quote has an approved option
+        $quoteOption = $quote->quoteOptions()->get()->filter(function($item) { return $item->selected == 'y'; })->first();
+
+        // Prepare variables for outside request
+        $url = "https://ujv.travelagentadmin.com/quotes/quote.php?quote_id=".$quote->quote_id;
+        $credentials = ['userName' => 'travelAgentJunkie', 'passWord' => \Hash::make('F#T#A@305')];
+        $data = [
+            'userName'          =>  $credentials['userName'],
+            'passWord'          =>  $credentials['passWord'],
+            'action'            =>  'proceed_to_post_sale',
+            'quote_option_id'   =>  $quoteOption->quote_option_id
+        ];
+
+        //open connection
+        $ch = curl_init();
+
+        //set the url, POST data
+        curl_setopt($ch,CURLOPT_URL, $url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch,CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $data);
+
+        //execute post
+        if($result = curl_exec($ch) === false)
+            $result = curl_error($ch);
+
+        //close connection
+        curl_close($ch);
+
+        dd($result);
     }
 
     /**
@@ -238,7 +279,7 @@ class QuoteController extends Controller {
     public function saveCreditCard(CreateCreditCardRequest $request, Authorize $authorize)
     {
         // To use testing uncomment the following line
-        // $authorize = new Authorize($test = true);
+        $authorize = new Authorize($test = true);
 
         $customerProfileId = $authorize->createPaymentProfile($request->all());
         if($customerProfileId <= 0)
@@ -272,7 +313,7 @@ class QuoteController extends Controller {
         $postSale = $quote->postSale()->get()->first();
         // Check post sale exists
         if( ! $postSale instanceof PostSale)
-            throw new InternalErrorException(new \Exception("Sorry, the quote you are looking haven't been processed."));
+            return view('quote.create_post_sale', compact('quote'));
 
         // Select travelers
         $travelers = new Collection();

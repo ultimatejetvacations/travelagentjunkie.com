@@ -486,7 +486,7 @@
             @endif
 
             {{--Additional services--}}
-            @if(count( $acceptedOption->vendors()->get()->filter(function($item) { return ($item->vendor_id == 0 || $item->vendor()->get()->first()->type == 'Misc' && $item->selected == 'y'); })->all() )>0)
+            @if(count( $acceptedOption->vendors()->get()->filter(function($item) { return (($item->vendor_id == 0 || $item->vendor()->get()->first()->type == 'Misc') && $item->selected == 'y'); })->all() )>0)
                 <div class="col-xs-12">
                     <div class="additional-container panel panel-success">
                         <div class="panel-heading">

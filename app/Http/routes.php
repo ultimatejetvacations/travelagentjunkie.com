@@ -12,10 +12,11 @@
 */
 
 Route::post('quote/approve-option/{quoteOptionId}', ['as' => 'quote.approveOption', 'uses' => 'QuoteController@approveOption']);
-Route::get('quote/second-step/{token}', ['as' => 'quote.secondStep', 'uses' => 'QuoteController@secondStep']);
+Route::post('quote/create-customer-profile', ['as' => 'quote.createCustomerProfile', 'uses' => 'QuoteController@createCustomerProfile']);
+Route::post('quote/create-post-sale', ['as' => 'quote.createPostSale', 'uses' => 'QuoteController@createPostSale']);
 Route::post('quote/save-traveler', ['as' => 'quote.saveTraveler', 'uses' => 'QuoteController@saveTraveler']);
 Route::post('quote/save-credit-card', ['as' => 'quote.saveCreditCard', 'uses' => 'QuoteController@saveCreditCard']);
-Route::post('quote/create-customer-profile', ['as' => 'quote.createCustomerProfile', 'uses' => 'QuoteController@createCustomerProfile']);
+Route::get('quote/second-step/{token}', ['as' => 'quote.secondStep', 'uses' => 'QuoteController@secondStep']);
 Route::get('quote/{token}', ['as' => 'quote', 'uses' => 'QuoteController@quote']);
 
 Route::controllers([
