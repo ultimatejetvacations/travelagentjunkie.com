@@ -1,14 +1,13 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <base href="{{url('./')}}" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
 
     <title>Travel Agent Junkie - 505</title>
-    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.paper.css"/>
-    <link rel="stylesheet" href="assets/css/app.css"/>
+    <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.paper.css"/>
+    <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
 <body>
 

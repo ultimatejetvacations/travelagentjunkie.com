@@ -55,7 +55,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-3 col-lg-3 hidden-sm hidden-xs" align="center"> <img alt="User Pic" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100" class="img-circle"> </div>
+                            <div class="col-md-3 col-lg-3 hidden-sm hidden-xs" align="center"> <img alt="User Pic" src="//lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100" class="img-circle"> </div>
 
                             <div class=" col-md-9 col-lg-9 ">
                                 <table class="table table-user-information">
@@ -300,11 +300,11 @@
                                             @foreach($room->photos()->get() as $photo_record)
                                                 @if($photo_record->id_hotel_photo > 0)
                                                     <div class="col-xs-4 marginBottom20">
-                                                        <img class="img-rounded" width="100%" src="http://www.ultimatejetvacations.com/images_resort/{{$photo_record->hotelPhoto()->get()->first()->path}}" />
+                                                        <img class="img-rounded" width="100%" src="//www.ultimatejetvacations.com/images_resort/{{$photo_record->hotelPhoto()->get()->first()->path}}" />
                                                     </div>
                                                 @else
                                                     <div class="col-xs-4 marginBottom20">
-                                                        <img class="img-rounded" width="100%" src="http://www.ultimatejetvacations.com/images_resort/{{$photo_record->roomPhoto()->get()->first()->path}}" />
+                                                        <img class="img-rounded" width="100%" src="//www.ultimatejetvacations.com/images_resort/{{$photo_record->roomPhoto()->get()->first()->path}}" />
                                                     </div>
                                                 @endif
                                             @endforeach
