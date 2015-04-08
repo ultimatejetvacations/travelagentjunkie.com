@@ -11,7 +11,7 @@
 |
 */
 
-Route::post('/quote/approve-option/{quoteOptionId}', ['as' => 'quote.approveOption', 'uses' => 'QuoteController@approveOption']);
+Route::post('quote/approve-option/{quoteOptionId}', ['as' => 'quote.approveOption', 'uses' => 'QuoteController@approveOption']);
 Route::post('quote/create-customer-profile', ['as' => 'quote.createCustomerProfile', 'uses' => 'QuoteController@createCustomerProfile']);
 Route::post('quote/create-post-sale', ['as' => 'quote.createPostSale', 'uses' => 'QuoteController@createPostSale']);
 Route::post('quote/save-traveler', ['as' => 'quote.saveTraveler', 'uses' => 'QuoteController@saveTraveler']);
