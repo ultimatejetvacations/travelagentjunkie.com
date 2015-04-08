@@ -167,8 +167,8 @@ class QuoteController extends Controller {
         $quoteOption = $quote->quoteOptions()->get()->filter(function($item) { return $item->selected == 'y'; })->first();
 
         // Prepare variables for outside request
-        $url = "https://ujv.travelagentadmin.com/quotes/test.php?quote_id=".$quote->quote_id;
-        $credentials = ['userName' => 'travelAgentJunkie', 'passWord' => \Hash::make('F#T#A@305')];
+        $url = "https://ujv.travelagentadmin.com/quotes/quote.php?quote_id=".$quote->quote_id;
+        $credentials = ['userName' => 'travelAgentJunkie', 'passWord' => md5('F#T#A@305')];
         $data = [
             'userName'          =>  $credentials['userName'],
             'passWord'          =>  $credentials['passWord'],
@@ -194,15 +194,11 @@ class QuoteController extends Controller {
 	    {
 	        trigger_error(curl_error($ch));
 	    }
-        // curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($ch,CURLOPT_POST, 1);
-        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-        // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 
         //close connection
         curl_close($ch);
 
-        dd($result);
+        return \Redirect::route('quote.secondStep', $token);
     }
 
     /**
