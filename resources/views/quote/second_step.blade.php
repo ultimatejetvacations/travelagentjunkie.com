@@ -154,7 +154,7 @@
                             </div>
                         </div>
                     @empty
-                        <h3 class="well text-center">There are not travelers for this reservation yet.</h3>
+                        <h3 class="well text-center">There are no travelers yet for this reservation.</h3>
                     @endforelse
                 </div>
             </div>
