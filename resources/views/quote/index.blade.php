@@ -379,7 +379,7 @@
 @section('content')
     {{--Modal window--}}
     @foreach($options as $key => $option)
-        {!! \Form::open(['method' => 'POST', 'url' => url('/quote/approve-option/'.$option->quote_option_id)]) !!}
+        {!! \Form::open(['method' => 'POST', 'url' => secure_url('/quote/approve-option/'.$option->quote_option_id)]) !!}
         {{--<form action="{{route('quote.approveOption', $option->quote_option_id)}}" method="POST">--}}
             {{--<input type="hidden" name="_token" value="{{csrf_token()}}">--}}
 
