@@ -299,16 +299,35 @@
             });
 
             // Listener for modal navigation
-            $(document.body).on('click', '.modal-navigation', function () {
-                var currentModalId = '#'+$(this).closest('.modal').attr('id');
-
-                // Hide current modal and show target modal
-                $(currentModalId).modal('hide');
-            });
+//            $(document.body).on('click', '.modal-navigation', function () {
+//                var currentModalId = '#'+$(this).closest('.modal').attr('id');
+//
+//                // Hide current modal and show target modal
+//                $(currentModalId).modal('hide');
+//            });
 
             //Listener for modal show
             $('.modal').on('shown.bs.modal', function () {
-                $(this).css('overflow', 'auto');
+                // Work around for modal scroll to work properly
+                if($(window).height() < 992) {
+                    // Set black background height for modal window
+                    var height = 0;
+                    var tempHeight = $(this).find('.modal-info').outerHeight();
+                    height = tempHeight + $(this).find('.summary').outerHeight();
+                    var minHeight = $(document.body).height();
+                    $(this).find('.modal-backdrop').css({
+                        'height': height + 90,
+                        'min-height': minHeight
+                    });
+                } else {
+                    // Set black background height for modal window
+                    var height = $(this).find('.modal-info').outerHeight();
+                    var minHeight = $(document.body).height();
+                    $(this).find('.modal-backdrop').css({
+                        'height': height + 90,
+                        'min-height': minHeight
+                    });
+                }
             });
 
             /*
@@ -370,14 +389,15 @@
                 <div class="modal-info modal-dialog custom-modal-dialog col-md-8 custom-col-md-8">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <button type="button" class="close custom-close visible-xs visible-sm" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel">
                                 Option {{$key+1}} of {{count($options)}}
 
-                                <div class="modal-navigation pull-right">
-                                    <a class="modal-navigation btn btn-success btn-xs @if($key+1 < 2) disabled @endif" href="#" data-toggle="modal" data-target="#modal-{{$key}}" class="btn btn-success btn-sm" href="#"><i class="fa fa-long-arrow-left"></i></a>
-                                    <a class="modal-navigation btn btn-success btn-xs @if($key+1 >= count($options)) disabled @endif" href="#" data-toggle="modal" data-target="#modal-{{$key+2}}" class="btn btn-success btn-sm" href="#"><i class="fa fa-long-arrow-right"></i></a>
-                                    <button type="button" class="close custom-close visible-xs visible-sm" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                </div>
+                                {{--<div class="modal-navigation pull-right">--}}
+                                    {{--<a class="modal-navigation btn btn-success btn-xs @if($key+1 < 2) disabled @endif" href="#" data-toggle="modal" data-target="#modal-{{$key}}" class="btn btn-success btn-sm" href="#"><i class="fa fa-long-arrow-left"></i></a>--}}
+                                    {{--<a class="modal-navigation btn btn-success btn-xs @if($key+1 >= count($options)) disabled @endif" href="#" data-toggle="modal" data-target="#modal-{{$key+2}}" class="btn btn-success btn-sm" href="#"><i class="fa fa-long-arrow-right"></i></a>--}}
+                                    {{--<button type="button" class="close custom-close visible-xs visible-sm" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--}}
+                                {{--</div>--}}
                             </h4>
                         </div>
                         <div class="modal-body">
