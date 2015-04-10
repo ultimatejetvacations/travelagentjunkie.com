@@ -380,7 +380,7 @@
     {{--Modal window--}}
     @foreach($options as $key => $option)
         {{--{!! \Form::open(['method' => 'POST', 'url' => url('/quote/approve-option/'.$option->quote_option_id)]) !!}--}}
-        <form action="{{secure_url('/quote/approve-option/'.$option->quote_option_id)}}" method="POST">
+        <form action="{{route('quote.approveOption', $option->quote_option_id)}}" method="POST">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
 
             <div class="modal fade" id="modal-{{$key+1}}" tabindex="-1" role="dialog" aria-labelledby="detailsModal" aria-hidden="true">
