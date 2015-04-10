@@ -130,8 +130,14 @@ class QuoteController extends Controller {
      */
     public function createCustomerProfile(CreateCustomerProfileRequest $request, IQuoteRepository $quoteRepository, MemberCustomerProfileRepository $memberCustomerProfileRepository, Authorize $authorize)
     {
+        // To use all variables as testing uncomment line on:
+        // 1 - QuoteController@createCustomerProfile
+        // 2 - QuoteController@saveCreditCard
+        // 3 - When loading profiles and credit cards on the view quote/second_step
+        //     pass a "true" on the  on the authorizeProfile method like this example: $customerProfile->authorizeProfile(true)->paymentProfiles
+        //
         // To use testing uncomment the following line
-        $authorize = new Authorize($test = true);
+        // $authorize = new Authorize($test = true);
 
         // Select quote
         $quote = $quoteRepository->getEntity()->where('token', '=', $request->get('token'))->get()->first();
@@ -281,8 +287,14 @@ class QuoteController extends Controller {
      */
     public function saveCreditCard(CreateCreditCardRequest $request, Authorize $authorize)
     {
+        // To use all variables as testing uncomment line on:
+        // 1 - QuoteController@createCustomerProfile
+        // 2 - QuoteController@saveCreditCard
+        // 3 - When loading profiles and credit cards on the view quote/second_step
+        //     pass a "true" on the  on the authorizeProfile method like this example: $customerProfile->authorizeProfile(true)->paymentProfiles
+        //
         // To use testing uncomment the following line
-        $authorize = new Authorize($test = true);
+        // $authorize = new Authorize($test = true);
 
         $customerProfileId = $authorize->createPaymentProfile($request->all());
         if($customerProfileId <= 0)

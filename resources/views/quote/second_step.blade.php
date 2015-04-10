@@ -185,7 +185,7 @@
                         {{--Customer profile info--}}
                         @forelse($customerProfiles as $customerProfile)
                             <?php $customerTraveler = $customerProfile->memberTraveler()->get()->first(); // Work around to avoid making a request for each property
-                                  $paymentProfiles = $customerProfile->authorizeProfile(true)->paymentProfiles // Work around to avoid making a request for counting and then for displaying ?>
+                                  $paymentProfiles = $customerProfile->authorizeProfile()->paymentProfiles // Work around to avoid making a request for counting and then for displaying ?>
                             <div class="panel panel-success" style="margin-bottom: 0">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">{{$customerTraveler->prefix.' '}}{{$customerTraveler->first_name.' '}}{{$customerTraveler->middle_name.' '}}{{$customerTraveler->last_name.' '}}</h3>
