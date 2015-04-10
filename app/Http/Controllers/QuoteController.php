@@ -168,7 +168,7 @@ class QuoteController extends Controller {
 
         // Prepare variables for outside request
         $url = "https://ujv.travelagentadmin.com/quotes/quote.php?quote_id=".$quote->quote_id;
-        $credentials = ['userName' => 'travelAgentJunkie', 'passWord' => md5('F#T#A@305')];
+        $credentials = ['userName' => env('ADMIN_CREDENTIALS_USERNAME'), 'passWord' => md5(env('ADMIN_CREDENTIALS_PASSWORD'))];
         $data = [
             'userName'          =>  $credentials['userName'],
             'passWord'          =>  $credentials['passWord'],
