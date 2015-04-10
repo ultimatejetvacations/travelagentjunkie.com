@@ -13,7 +13,7 @@
 
 Route::group(['https', 'prefix' => 'quote'], function()
 {
-    Route::post('approve-option/{quoteOptionId}', ['as' => 'quote.approveOption', 'uses' => 'QuoteController@approveOption']);
+    Route::post('approve-option/{quoteOptionId}', ['as' => 'quote.approveOption', 'https', 'uses' => 'QuoteController@approveOption']);
     Route::post('create-customer-profile', ['as' => 'quote.createCustomerProfile', 'uses' => 'QuoteController@createCustomerProfile']);
     Route::post('create-post-sale', ['as' => 'quote.createPostSale', 'uses' => 'QuoteController@createPostSale']);
     Route::post('save-traveler', ['as' => 'quote.saveTraveler', 'uses' => 'QuoteController@saveTraveler']);
