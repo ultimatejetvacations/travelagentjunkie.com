@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => (env('APP_ENV', '') == 'local' ? 'http://localhost' : 'https://travelagentjunkie.com'),
 
 	/*
 	|--------------------------------------------------------------------------
