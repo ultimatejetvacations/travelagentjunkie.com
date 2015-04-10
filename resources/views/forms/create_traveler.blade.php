@@ -60,7 +60,7 @@
         </div>
 
         <div class="form-group @if($errors->has('date_of_birth')) has-error has-feedback @endif">
-            {!! \Form::label('date_of_birth', 'Date of Birth:', ['class' => 'control-label col-sm-2']) !!}
+            {!! \Form::label('date_of_birth', 'Date of Birth:*', ['class' => 'control-label col-sm-2']) !!}
             <div class="col-sm-10">
                 {!! \Form::text('date_of_birth', null, ['class' => 'form-control input-sm']) !!}
                 @if($errors->has('date_of_birth'))
