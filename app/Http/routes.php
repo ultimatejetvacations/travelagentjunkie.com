@@ -19,7 +19,7 @@ Route::group(['https', 'prefix' => 'quote'], function()
     Route::post('save-traveler', ['as' => 'quote.saveTraveler', 'uses' => 'QuoteController@saveTraveler']);
     Route::post('save-credit-card', ['as' => 'quote.saveCreditCard', 'uses' => 'QuoteController@saveCreditCard']);
     Route::get('second-step/{token}', ['as' => 'quote.secondStep', 'uses' => 'QuoteController@secondStep']);
-    Route::get('{token}', ['as' => 'quote', 'uses' => 'QuoteController@quote']);
+    Route::get('{token}', ['as' => 'quote', 'https', 'uses' => 'QuoteController@quote']);
 });
 
 Route::controllers([
