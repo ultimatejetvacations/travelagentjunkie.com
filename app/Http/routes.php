@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['prefix' => 'quote', 'https'], function()
+Route::group(['prefix' => 'quote', 'https' => true], function()
 {
     Route::post('approve-option/{quoteOptionId}', ['as' => 'quote.approveOption', 'uses' => 'QuoteController@approveOption']);
     Route::post('create-customer-profile', ['as' => 'quote.createCustomerProfile', 'uses' => 'QuoteController@createCustomerProfile']);
