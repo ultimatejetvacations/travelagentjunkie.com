@@ -6,6 +6,11 @@
 
 @section('css')
     <link rel="stylesheet" href="/assets/vendor/material-card.css"/>
+    <style>
+        .modal {
+            overflow-y: auto !important;
+        }
+    </style>
 @stop
 
 @section('js')
@@ -281,7 +286,13 @@
 
             // Listener for focus to the first input in a modal
             $('.modal').on('shown.bs.modal', function () {
-                $(this).find('input').first().focus();
+                // Set black background height for modal window
+                var height = $(this).closest('.modal').find('.modal-dialog').outerHeight();
+                var minHeight = $(document.body).height();
+                $(this).closest('.modal').find('.modal-backdrop').css({
+                    'height': height + 62,
+                    'min-height' : minHeight
+                });
             });
 
             /*
@@ -333,8 +344,9 @@
 @section('content')
     {{--Modal window--}}
     @foreach($options as $key => $option)
-        <form action="{{route('quote.approveOption', $option->quote_option_id)}}" method="POST">
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
+        {!! \Form::open(['method' => 'POST', 'url' => route('quote.approveOption', $option->quote_option_id)]) !!}
+        {{--<form action="{{route('quote.approveOption', $option->quote_option_id)}}" method="POST">--}}
+            {{--<input type="hidden" name="_token" value="{{csrf_token()}}">--}}
 
             <div class="modal fade" id="modal-{{$key+1}}" tabindex="-1" role="dialog" aria-labelledby="detailsModal" aria-hidden="true">
 
@@ -837,7 +849,8 @@
                 </div>
 
             </div>
-        </form>
+        {{--</form>--}}
+        {!! \Form::close() !!}
     @endforeach
 
     <div class="container-fluid">
