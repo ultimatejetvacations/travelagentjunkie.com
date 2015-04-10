@@ -52,12 +52,9 @@
     background-color: #FFFFFF;
 }
 .card .card-action a {
-    color: #ffab40;
-    margin-right: 16px;
     transition: color 0.3s ease;
     text-transform: uppercase;
 }
 .card .card-action a:hover {
-    color: #ffd8a6;
     text-decoration: none;
 }

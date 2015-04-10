@@ -271,6 +271,19 @@
                 adjustSummary($(this));
             });
 
+            // Listener for modal navigation
+            $(document.body).on('click', '.modal-navigation', function () {
+                var currentModalId = '#'+$(this).closest('.modal').attr('id');
+
+                // Hide current modal and show target modal
+                $(currentModalId).modal('hide');
+            });
+
+            // Listener for focus to the first input in a modal
+            $('.modal').on('shown.bs.modal', function () {
+                $(this).find('input').first().focus();
+            });
+
             /*
              |--------------------------------------------------------------------------
              | Stylizing features
@@ -330,7 +343,14 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close visible-xs visible-sm" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Option {{$key+1}} of {{count($options)}}</h4>
+                            <h4 class="modal-title" id="myModalLabel">
+                                Option {{$key+1}} of {{count($options)}}
+
+                                <div class="modal-navigation pull-right">
+                                    <a class="modal-navigation btn btn-success btn-xs @if($key+1 < 2) disabled @endif" href="#" data-toggle="modal" data-target="#modal-{{$key}}" class="btn btn-success btn-sm" href="#"><i class="fa fa-long-arrow-left"></i></a>
+                                    <a class="modal-navigation btn btn-success btn-xs @if($key+1 >= count($options)) disabled @endif" href="#" data-toggle="modal" data-target="#modal-{{$key+2}}" class="btn btn-success btn-sm" href="#"><i class="fa fa-long-arrow-right"></i></a>
+                                </div>
+                            </h4>
                         </div>
                         <div class="modal-body">
 
@@ -505,9 +525,9 @@
                                                             <td>{{$room->number_of_adults+$room->number_of_children+$room->number_of_infants}}</td>
                                                             <td>{{$room->nightly_rate}}</td>
                                                             <td>{{number_format($total_price,2)}}</td>
-                                                            <td><a href="#" class="hotel_more_info">More Info ▼</a></td>
+                                                            <td><a href="#" class="hotel_more_info">Less Info ▲</a></td>
                                                         </tr>
-                                                        <tr class="hidden">
+                                                        <tr>
                                                             <td colspan="9" class="room_description">
                                                                 <h5 class="col-xs-12">{{$room->room()->get()->first()->hotel()->get()->first()->name_}}</h5>
                                                                 <div style="white-space: pre-wrap" class="col-xs-12 well well-sm">{!!\String::BBCode2Html($room->room()->get()->first()->descripcion)!!}</div>
@@ -823,6 +843,20 @@
     <div class="container-fluid">
 
         <div class="row">
+            {{--Greetings--}}
+            <div class="col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Greetings <i class="fa fa-comments pull-right"></i></h3>
+                    </div>
+                    <div class="panel-body">
+                        @if( ! empty($quote->greeting) )
+                            {!!\String::BBCode2Html($quote->greeting)!!}
+                        @endif
+                    </div>
+                </div>
+            </div>
+
             {{--Member Info--}}
             <div class="col-sm-6">
                 <div class="panel panel-primary">
@@ -880,40 +914,26 @@
                     </div>
                 </div>
             </div>
-
-            {{--Greetings--}}
-            <div class="col-sm-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Greetings <i class="fa fa-comments pull-right"></i></h3>
-                    </div>
-                    <div class="panel-body">
-                        @if( ! empty($quote->greeting) )
-                            {!!\String::BBCode2Html($quote->greeting)!!}
-                        @endif
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="row">
-            <div class="col-xs-12">
-                <div class="jumbotron" style="background-color: #ffffff; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3)">
-                    <h1>Here are the options</h1>
-                    <p>Click on details to see each option in depth.</p>
-                </div>
-            </div>
+            {{--<div class="col-xs-12">--}}
+                {{--<div class="jumbotron" style="background-color: #ffffff; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3)">--}}
+                    {{--<h1>Here are the options</h1>--}}
+                    {{--<p>Click on details to see each option in depth.</p>--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
             @foreach($options as $key => $option)
                 <div class="col-xs-12 col-sm-4 col-md-3 card-container">
                     <div class="card">
                         <div class="card-title">
-                            <h5 class="text-center">{{$key+1}}</h5>
+                            <h5 class="text-center">Option {{$key+1}}</h5>
                         </div>
 
-                        @if( ! empty($option->photos()->get()->first()->hotelPhoto()->get()->first()->path) )
+                        @if( ! empty( $photoPath = $option->photos()->get()->first()->hotelPhoto()->get()->first()->path) )
                             <div class="card-image">
-                                <img class="img-responsive" src="//www.ultimatejetvacations.com/images_resort/{{$option->photos()->get()->first()->hotelPhoto()->get()->first()->path}}">
+                                <a data-quote-option-id="{{$option->quote_option_id}}" class="view-details" href="#" data-toggle="modal" data-target="#modal-{{$key+1}}"><img class="img-responsive" src="//www.ultimatejetvacations.com/images_resort/{{$photoPath}}"></a>
                             </div>
                         @endif
 
@@ -922,7 +942,7 @@
                         </div>
 
                         <div class="card-action text-right">
-                            <a data-quote-option-id="{{$option->quote_option_id}}" class="view-details" href="" data-toggle="modal" data-target="#modal-{{$key+1}}">Details</a>
+                            <a data-quote-option-id="{{$option->quote_option_id}}" class="view-details btn btn-success" href="#" data-toggle="modal" data-target="#modal-{{$key+1}}">Details</a>
                         </div>
                     </div>
                 </div>
