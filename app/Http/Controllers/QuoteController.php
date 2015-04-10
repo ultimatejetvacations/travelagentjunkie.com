@@ -324,11 +324,17 @@ class QuoteController extends Controller {
         if( ! $quoteOption instanceof QuoteOption)
             throw new InternalErrorException(new \Exception("Sorry, the quote you are looking haven't been approved yet."));
 
+        // Select quote member
+        $member = $quote->member()->get()->first();
+
+        // Select Travel Agency
+        $travelAgency = $member->agency()->get()->first();
+
         // Select post sale
         $postSale = $quote->postSale()->get()->first();
         // Check post sale exists
         if( ! $postSale instanceof PostSale)
-            return view('quote.create_post_sale', compact('quote'));
+            return view('quote.create_post_sale', compact('quote', 'member', 'travelAgency'));
 
         // Select travelers
         $travelers = new Collection();
@@ -341,12 +347,6 @@ class QuoteController extends Controller {
             $customerProfileTravelers[$traveler->traveler_id] = $traveler->prefix.' '.$traveler->first_name.' '.$traveler->middle_name.' '.$traveler->last_name;
             $travelers_id[] = $traveler->traveler_id;
         }
-
-        // Select quote member
-        $member = $quote->member()->get()->first();
-
-        // Select Travel Agency
-        $travelAgency = $member->agency()->get()->first();
 
         // Select Profiles (Customers) and take them out from available options to create new ones
         $customerProfiles = $memberCustomerProfileRepository->getEntity()->where('member_id', '=', $member->member_id)->whereIn('traveler_id', $travelers_id)->get();
