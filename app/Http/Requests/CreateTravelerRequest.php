@@ -25,7 +25,7 @@ class CreateTravelerRequest extends Request {
 			'token'         =>  'required|exists:quotes,token',
 			'first_name'    =>  'required',
 			'last_name'     =>  'required',
-			'date_of_birth' =>  'date_format:m/d/Y',
+//			'date_of_birth' =>  'date_format:m/d/Y',
 		];
 	}
 
