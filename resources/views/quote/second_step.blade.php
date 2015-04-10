@@ -73,7 +73,7 @@
                             <h3 class="panel-title">Add a new traveler to the booking</h3>
                         </div>
                         <div class="panel-body">
-                            @include('forms.create_traveler', ['url' => route('quote.saveTraveler'),
+                            @include('forms.create_traveler', ['url' => secure_url('/quote/save-traveler'),
                                                                 'token' => $quote->token,
                                                                 'submitButtonText' => 'Create'])
                         </div>
@@ -175,7 +175,7 @@
                                 <h3 class="panel-title">Create a Payment Profile</h3>
                             </div>
                             <div class="panel-body">
-                                @include('forms.create_customer_profile', ['url' => route('quote.createCustomerProfile'),
+                                @include('forms.create_customer_profile', ['url' => secure_url('/quote/create-customer-profile'),
                                                                     'token' => $quote->token,
                                                                     'travelers' => $customerProfileTravelers,
                                                                     'submitButtonText' => 'Create'])
@@ -203,7 +203,7 @@
                                             <h3 class="panel-title">Add a New Credit Card</h3>
                                         </div>
                                         <div class="panel-body">
-                                            @include('forms.create_credit_card', ['url' => route('quote.saveCreditCard'),
+                                            @include('forms.create_credit_card', ['url' => secure_url('/quote/save-credit-card'),
                                                                     'token' => $quote->token,
                                                                     'travelerInfo' => $customerTraveler,
                                                                     'customerProfileId' => $customerProfile->customerProfileId,

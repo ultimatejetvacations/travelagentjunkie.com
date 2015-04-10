@@ -153,7 +153,7 @@ class QuoteController extends Controller {
         else
             return \Redirect::back()->withInput()->withErrors(['response_error' => "Error trying to create the payment profile."]);
 
-        return \Redirect::route('quote.secondStep', $request->get('token'));
+        return \Redirect::secure('/quote/second-step/'.$request->get('token'));
     }
 
     public function createPostSale(CreatePostSaleRequest $request, IQuoteRepository $quoteRepository)
@@ -197,8 +197,7 @@ class QuoteController extends Controller {
 
         //close connection
         curl_close($ch);
-
-        return \Redirect::route('quote.secondStep', $token);
+        return \Redirect::secure('/quote/second-step/'.$token);
     }
 
     /**
@@ -272,7 +271,7 @@ class QuoteController extends Controller {
         if( ! $postSaleTravelerRepository->getEntity()->create($postSaleTravelerData) )
             throw new InternalErrorException(new \Exception("Sorry, we created the traveler, but we could not assign it to the booking; if the error continues, contact technical support."));
 
-        return \Redirect::route('quote.secondStep', $data['token']);
+        return \Redirect::secure('/quote/second-step/'.$data['token']);
     }
 
     /**
@@ -289,7 +288,7 @@ class QuoteController extends Controller {
         if($customerProfileId <= 0)
             return \Redirect::back()->withInput()->withErrors(['response_error' => "We could not save the credit card information. If the error continue, please contact technical support."]);
 
-        return \Redirect::route('quote.secondStep', $request->get('token'));
+        return \Redirect::secure('/quote/second-step/'.$request->get('token'));
     }
 
     /**

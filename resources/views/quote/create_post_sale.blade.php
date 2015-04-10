@@ -25,7 +25,7 @@
                         <p class="alert alert-danger">{{$errors->first('token')}}</p>
                     @endif
                     <h4>Let's begin creating the post sale.</h4>
-                    {!! \Form::open(['method' => 'POST', 'url' => route('quote.createPostSale'), 'class' => 'form-horizontal']) !!}
+                    {!! \Form::open(['method' => 'POST', 'url' => secure_url('/quote/create-post-sale'), 'class' => 'form-horizontal']) !!}
                         {!! \Form::submit('Create Post Sale', ['class' => 'btn btn-success']) !!}
                         {!! \Form::hidden('token', $quote->token) !!}
                     {!! \Form::close() !!}

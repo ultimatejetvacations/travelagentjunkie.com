@@ -42,7 +42,7 @@
                     <h1>Here is what you approved</h1>
                     <p>If you would like to make any change, please contact your Private Travel Advisor.</p>
 
-                    <p style="display: inline-block; vertical-align: middle">Continue with the reservation <a href="{{route('quote.secondStep', $quote->token)}}" class="btn btn-success">Second Step</a></p>
+                    <p style="display: inline-block; vertical-align: middle">Continue with the reservation <a href="{{secure_url('/quote/second-step/'.$quote->token)}}" class="btn btn-success">Second Step</a></p>
 
                 </div>
             </div>
