@@ -11,6 +11,9 @@
             line-height: 1.2 !important;
             margin: 0 0 0 10px !important;
         }
+        .input-container {
+            width: 30px !important;
+        }
         .modal {
             overflow-y: auto !important;
         }
@@ -410,7 +413,7 @@
                                                     @foreach($airline->airfares()->get() as $airfare_key => $airfare)
                                                         <tr>
                                                             @if($airfare_key == 0)
-                                                                <td class="text-center" rowspan="{{count($airline->airfares()->get())}}"><input checked type="checkbox" name="air[]" class="airfare_option_choice" value="{{$airline->quote_airline_id}}" price="{{$airline->price}}"></td></td>
+                                                                <td class="text-center input-container" rowspan="{{count($airline->airfares()->get())}}"><input checked type="checkbox" name="air[]" class="airfare_option_choice" value="{{$airline->quote_airline_id}}" price="{{$airline->price}}"></td></td>
                                                             @endif
                                                             <td>{{$airfare->airline()->get()->first()->airline_name}}</td>
                                                             <td>{{$airfare->flight_number}}</td>
@@ -462,7 +465,7 @@
                                                 <tbody class="marginTop20">
                                                 @foreach($option->vendors()->get()->filter(function($item) { return ($item->vendor_id > 0 && $item->vendor()->get()->first()->type == 'Transfer'); })->all() as $service)
                                                     <tr>
-                                                        <td class="text-center"><input checked type="checkbox" name="service[]" class="transfer_option_choice" value="{{$service->quote_options_vendor_id}}" price="{{$service->price}}"></td>
+                                                        <td class="text-center input-container"><input checked type="checkbox" name="service[]" class="transfer_option_choice" value="{{$service->quote_options_vendor_id}}" price="{{$service->price}}"></td>
                                                         <td>{{$service->vendor()->get()->first()->vendor_name}}</td>
                                                         <td>{{$service->description}}</td>
                                                         <td>{{$service->price}}</td>
@@ -542,7 +545,7 @@
                                                         $total_price = $total_nightly_price - $room->discount;
                                                         ?>
                                                         <tr>
-                                                            <td><input checked type="checkbox" name="hotel_room[]" class="hotel_option_choice" value="{{$room->quote_option_room_id}}" price="{{$total_price}}"></td>
+                                                            <td class="text-center input-container"><input checked type="checkbox" name="hotel_room[]" class="hotel_option_choice" value="{{$room->quote_option_room_id}}" price="{{$total_price}}"></td>
                                                             <td>{{$room->room()->get()->first()->hotel()->get()->first()->name_}}</td>
                                                             <td>{{$room->room()->get()->first()->nombre}}</td>
                                                             <td>{{$room->checkin}}</td>
@@ -611,7 +614,7 @@
                                                         @foreach($amenities as $amenity)
                                                             @if(!empty($amenity))
                                                                 <tr>
-                                                                    <td class="text-center"><input checked type="checkbox" disabled="disabled"></td>
+                                                                    <td class="text-center input-container"><input checked type="checkbox" disabled="disabled"></td>
                                                                     <td>{{$amenity}}</td>
                                                                     <td>$0.00</td>
                                                                 </tr>
@@ -691,7 +694,7 @@
                                                 <tbody class="marginTop20">
                                                 @foreach($option->vendors()->get()->filter(function($item) { return ($item->vendor_id > 0 && $item->vendor()->get()->first()->type == 'Excursion'); })->all() as $service)
                                                     <tr>
-                                                        <td class="text-center"><input checked type="checkbox" name="service[]" class="excursion_option_choice" value="{{$service->quote_options_vendor_id}}" price="{{$service->price}}"></td>
+                                                        <td class="text-center input-container"><input checked type="checkbox" name="service[]" class="excursion_option_choice" value="{{$service->quote_options_vendor_id}}" price="{{$service->price}}"></td>
                                                         <td>{{$service->vendor()->get()->first()->vendor_name}}</td>
                                                         <td>{{$service->description}}</td>
                                                         <td>{{$service->price}}</td>
@@ -727,7 +730,7 @@
 
                                                 <tbody class="marginTop20">
                                                     <tr>
-                                                        <td class="text-center"><input checked type="checkbox" name="insurance[]" class="insurance_option_choice" value="{{$option->quote_option_id}}" price="{{$option->insurance_cost}}"></td>
+                                                        <td class="text-center input-container"><input checked type="checkbox" name="insurance[]" class="insurance_option_choice" value="{{$option->quote_option_id}}" price="{{$option->insurance_cost}}"></td>
                                                         <td>{{$option->insurance()->get()->first()->insurance_name}}</td>
                                                         <td>{{$option->insurance_cost}}</td>
                                                     </tr>
@@ -763,7 +766,7 @@
                                                 <tbody class="marginTop20">
                                                 @foreach($option->vendors()->get()->filter(function($item) { return ($item->vendor_id == 0 || $item->vendor()->get()->first()->type == 'Misc'); })->all() as $service)
                                                     <tr>
-                                                        <td class="text-center"><input checked type="checkbox" name="service[]" class="additional_option_choice" value="{{$service->quote_options_vendor_id}}" price="{{$service->price}}"></td>
+                                                        <td class="text-center input-container"><input checked type="checkbox" name="service[]" class="additional_option_choice" value="{{$service->quote_options_vendor_id}}" price="{{$service->price}}"></td>
                                                         <td>@if($service->vendor_id == 0) {{$service->service_name}} @else {{$service->vendor()->get()->first()->vendor_name}} @endif</td>
                                                         <td>{{$service->description}}</td>
                                                         <td>{{$service->price}}</td>
