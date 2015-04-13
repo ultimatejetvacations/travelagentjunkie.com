@@ -162,10 +162,8 @@ class QuoteController extends Controller {
         return \Redirect::secure('/quote/second-step/'.$request->get('token'));
     }
 
-    public function createPostSale(CreatePostSaleRequest $request, IQuoteRepository $quoteRepository)
+    public function createPostSale($token, IQuoteRepository $quoteRepository)
     {
-        $token = $request->get('token');
-
         // Select quote based on token
         $quote = $quoteRepository->getEntity()->where('token', '=', $token)->get()->first();
 
@@ -334,7 +332,7 @@ class QuoteController extends Controller {
         $postSale = $quote->postSale()->get()->first();
         // Check post sale exists
         if( ! $postSale instanceof PostSale)
-            return view('quote.create_post_sale', compact('quote', 'member', 'travelAgency'));
+            return $this->createPostSale($token, $quoteRepository);
 
         // Select travelers
         $travelers = new Collection();
